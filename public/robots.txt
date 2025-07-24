@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://codigo-da-vida.com/sitemap.xml
+
+# Desenvolvido por Like Look Solutions
+# Contato: juliocamposmachado@gmail.com
+# WhatsApp: +55 11 97060-3441
+# Website: https://likelook.wixsite.com/solutions

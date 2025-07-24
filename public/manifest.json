@@ -1,0 +1,40 @@
+{
+  "short_name": "Código da Vida",
+  "name": "Código da Vida - Enciclopédia Interativa do Envelhecimento",
+  "description": "Enciclopédia interativa sobre envelhecimento humano, longevidade e ciência. Desenvolvido por Like Look Solutions.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "categories": ["education", "science", "health", "reference"],
+  "lang": "pt-BR",
+  "scope": "/",
+  "developer": {
+    "name": "Julio Campos Machado - Like Look Solutions",
+    "url": "https://likelook.wixsite.com/solutions"
+  }
+}
