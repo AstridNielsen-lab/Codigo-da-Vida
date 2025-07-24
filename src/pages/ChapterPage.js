@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { bookStructure } from '../data/bookStructure';
+import { bookStructure, topicContent } from '../data/bookStructure';
 import { Card } from '../styles/GlobalStyles';
 import TelomereSimulation from '../components/TelomereSimulation';
 
@@ -203,6 +203,93 @@ const KeyPointIcon = styled.div`
   color: white;
 `;
 
+const TopicDetailSection = styled.div`
+  background: ${props => props.theme.surface};
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 2rem 0;
+  box-shadow: 0 20px 60px ${props => props.theme.shadow};
+  border: 1px solid ${props => props.theme.border};
+  min-height: 400px;
+`;
+
+const TopicDetailContent = styled.div`
+  h3, h4, h5 {
+    color: ${props => props.theme.text};
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: ${props => props.theme.textSecondary};
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  
+  ul, ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    
+    li {
+      color: ${props => props.theme.textSecondary};
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+      
+      strong {
+        color: ${props => props.theme.text};
+      }
+    }
+  }
+  
+  div[style*="background"] {
+    border-radius: 8px;
+    
+    h5 {
+      color: ${props => props.theme.text};
+      margin-bottom: 0.5rem;
+    }
+    
+    ul li {
+      margin-bottom: 0.3rem;
+    }
+  }
+`;
+
+const TopicKeyPoints = styled.div`
+  background: ${props => props.theme.backgroundAlt};
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-left: 4px solid ${props => props.theme.accent};
+`;
+
+const TopicKeyPointsList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    color: ${props => props.theme.text};
+    
+    &:before {
+      content: '✓';
+      background: ${props => props.theme.accent};
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+  }
+`;
+
 const ChapterPage = () => {
   const { chapterId } = useParams();
   const [activeTopicIndex, setActiveTopicIndex] = useState(0);
@@ -337,6 +424,56 @@ const ChapterPage = () => {
             ))}
           </Sidebar>
         </ContentGrid>
+
+        {/* Seção de Conteúdo Detalhado do Tópico Selecionado */}
+        {chapter.topics[activeTopicIndex] && (() => {
+          const currentTopic = chapter.topics[activeTopicIndex];
+          const topicId = typeof currentTopic === 'object' ? currentTopic.id : currentTopic.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+          const topicData = topicContent[topicId];
+          
+          if (topicData) {
+            return (
+              <TopicDetailSection>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  key={activeTopicIndex}
+                >
+                  <SectionTitle>{topicData.title}</SectionTitle>
+                  <TopicDetailContent dangerouslySetInnerHTML={{ __html: topicData.content }} />
+                  
+                  {topicData.keyPoints && (
+                    <TopicKeyPoints>
+                      <h4 style={{ color: 'var(--text)', marginBottom: '1rem' }}>🎯 Pontos-Chave</h4>
+                      <TopicKeyPointsList>
+                        {topicData.keyPoints.map((point, index) => (
+                          <li key={index}>{point}</li>
+                        ))}
+                      </TopicKeyPointsList>
+                    </TopicKeyPoints>
+                  )}
+                </motion.div>
+              </TopicDetailSection>
+            );
+          } else {
+            return (
+              <TopicDetailSection>
+                <SectionTitle>{typeof currentTopic === 'object' ? currentTopic.title : currentTopic}</SectionTitle>
+                <TopicDetailContent>
+                  <p>Este tópico está sendo desenvolvido. Em breve teremos conteúdo detalhado sobre este assunto fundamental do envelhecimento humano.</p>
+                  <p>O conteúdo incluirá:</p>
+                  <ul>
+                    <li>Mecanismos moleculares detalhados</li>
+                    <li>Evidências científicas atualizadas</li>
+                    <li>Implicações terapêuticas</li>
+                    <li>Protocolos práticos</li>
+                  </ul>
+                </TopicDetailContent>
+              </TopicDetailSection>
+            );
+          }
+        })()}
 
         <InteractiveSection>
           <SectionTitle>🧬 Pontos-Chave do Capítulo</SectionTitle>
