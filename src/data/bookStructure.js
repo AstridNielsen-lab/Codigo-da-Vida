@@ -453,7 +453,28 @@ export const bookStructure = {
           id: 'ch1-2',
           title: 'Genética e Epigenética do Envelhecimento',
           description: 'Mutações, instabilidade genômica e modificações epigenéticas.',
-          topics: ['Instabilidade genômica', 'Telômeros e telomerase', 'Metilação do DNA', 'Modificações histônicas']
+          topics: [
+            {
+              title: 'Instabilidade genômica',
+              id: 'instabilidade-genomica',
+              description: 'Acúmulo de danos no DNA e declínio dos sistemas de reparo'
+            },
+            {
+              title: 'Telômeros e telomerase',
+              id: 'telomeros-telomerase',
+              description: 'Estruturas protetoras dos cromossomos e enzima de extensão'
+            },
+            {
+              title: 'Metilação do DNA',
+              id: 'metilacao-dna',
+              description: 'Modificações epigenéticas e relógios biológicos'
+            },
+            {
+              title: 'Modificações histônicas',
+              id: 'modificacoes-histonicas',
+              description: 'Alterações nas proteínas histonas e estrutura da cromatina'
+            }
+          ]
         },
         {
           id: 'ch1-3',

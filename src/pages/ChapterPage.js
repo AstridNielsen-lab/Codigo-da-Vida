@@ -416,9 +416,9 @@ const ChapterPage = () => {
                 active={activeTopicIndex === index}
                 onClick={() => setActiveTopicIndex(index)}
               >
-                <TopicTitle>{topic}</TopicTitle>
+                <TopicTitle>{typeof topic === 'object' ? topic.title : topic}</TopicTitle>
                 <TopicDescription>
-                  Clique para explorar este tópico em detalhes
+                  {typeof topic === 'object' ? topic.description : 'Clique para explorar este tópico em detalhes'}
                 </TopicDescription>
               </TopicCard>
             ))}
